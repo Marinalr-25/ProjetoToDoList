@@ -4,19 +4,6 @@
   box-sizing: border-box;
 }
 
-*::-webkit-scrollbar {
-  width: 0.8rem;
-}
-
-*::-webkit-scrollbar-track {
-  background-color: #eaeffa;
-  border-radius: 0.8rem;
-}
-*::-webkit-scrollbar-thumb {
-  background-color: #b7d3fb;
-  border-radius: 2rem;
-}
-
 html {
   font-size: 62.5%;
 }
@@ -135,10 +122,6 @@ body {
   }
 }
 
-.dragging {
-  opacity: 0.5;
-}
-
 .card-infos {
   display: flex;
   justify-content: space-between;
@@ -152,14 +135,14 @@ body {
   }
 }
 
-.cards-hover {
-  background-color: #eaeffa;
-  border-radius: 0.8rem;
-}
-
 .user img {
   width: 4.2rem;
   height: 4.2rem;
   border-radius: 100%;
   object-fit: cover;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #eaeffa;
+  border-radius: 0.8rem;
 }

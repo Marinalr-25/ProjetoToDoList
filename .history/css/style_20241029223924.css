@@ -135,10 +135,6 @@ body {
   }
 }
 
-.dragging {
-  opacity: 0.5;
-}
-
 .card-infos {
   display: flex;
   justify-content: space-between;
@@ -150,11 +146,6 @@ body {
   & i {
     color: #a8a8aa;
   }
-}
-
-.cards-hover {
-  background-color: #eaeffa;
-  border-radius: 0.8rem;
 }
 
 .user img {

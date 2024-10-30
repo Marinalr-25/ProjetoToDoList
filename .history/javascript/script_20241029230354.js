@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
   const cards = document.querySelectorAll('.kanban-card');
   const colunas = document.querySelectorAll('.kanban-cards');
-  let dragCard = null;
+  const dragCard = document.querySelector('.kanban-card.dragging');
 
   cards.forEach((card) => {
     card.addEventListener('dragstart', (e) => {
-      dragCard = card;
       e.currentTarget.classList.add('dragging');
     });
     card.addEventListener('dragend', (e) => {
       e.currentTarget.classList.remove('dragging');
-      dragCard = null;
     });
   });
 
@@ -23,11 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
     });
     coluna.addEventListener('drop', (e) => {
-      e.preventDefault();
       e.currentTarget.classList.remove('cards-hover');
-      if (dragCard) {
-        e.currentTarget.appendChild(dragCard);
-      }
+      e.currentTarget.appendChild(dragCard);
     });
   });
 });
