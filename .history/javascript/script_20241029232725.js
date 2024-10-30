@@ -29,25 +29,23 @@ document.addEventListener('DOMContentLoaded', function () {
         e.currentTarget.appendChild(dragCard);
       }
     });
-    coluna.addEventListener('touchmove', (e) => {
-      e.preventDefault();
-      const touchLocation = e.touches[0];
-      dragCard.style.position = 'absolute';
-      dragCard.style.left = `${
-        touchLocation.pageX - dragCard.offsetWidth / 2
-      }px`;
-      dragCard.style.top = `${
-        touchLocation.pageY - dragCard.offsetHeight / 2
-      }px`;
-    });
-    coluna.addEventListener('touchend', (e) => {
-      e.currentTarget.classList.remove('cards-hover');
-      if (dragCard && e.currentTarget.contains(dragCard)) {
-        e.currentTarget.appendChild(dragCard);
-      }
-      dragCard.style.position = 'relative';
-      dragCard.style.left = '';
-      dragCard.style.top = '';
-    });
+  });
+
+  // Eventos para mobile
+  coluna.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touchLocation = e.touches[0];
+    dragCard.style.position = 'absolute';
+    dragCard.style.left = `${touchLocation.pageX - dragCard.offsetWidth / 2}px`;
+    dragCard.style.top = `${touchLocation.pageY - dragCard.offsetHeight / 2}px`;
+  });
+  coluna.addEventListener('touchend', (e) => {
+    e.currentTarget.classList.remove('cards-hover');
+    if (dragCard && e.currentTarget.contains(dragCard)) {
+      e.currentTarget.appendChild(dragCard);
+    }
+    dragCard.style.position = 'relative';
+    dragCard.style.left = '';
+    dragCard.style.top = '';
   });
 });
