@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const ok = document.querySelector('.okButton');
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
-  const kanbanCards = document.querySelector('.kanban-cards');
+  const kanbanCard = document.querySelector('.kanban-card');
 
   let dragCard = null;
 
-  function addDragEvents(card) {
+  cards.forEach((card) => {
     card.addEventListener('dragstart', (e) => {
       dragCard = card;
       e.currentTarget.classList.add('dragging');
@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('dragging');
       dragCard = null;
     });
-  }
-  cards.forEach((card) => addDragEvents(card));
+  });
 
   colunas.forEach((coluna) => {
     coluna.addEventListener('dragover', (e) => {
@@ -61,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.draggable = true;
 
     novoCard.innerHTML = `
+    <div class="kanban-card" draggable="true">
         <div class="badge medium">
             <span>outro teste</span>
         </div>
@@ -77,11 +77,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class="user">
                 <img src="images/iconePerfil2.png" alt="avatar2" />
             </div>
+            </div>
         </div>
     `;
 
-    kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
+    kanbanCard.appendChild(novoCard);
 
     adicionando.style.display = 'none';
   });

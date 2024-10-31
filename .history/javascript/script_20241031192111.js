@@ -3,14 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const colunas = document.querySelectorAll('.kanban-cards');
   const mais = document.querySelectorAll('.fa-solid.fa-plus');
   const cancelar = document.querySelector('.cancelarButton');
-  const ok = document.querySelector('.okButton');
   const adicionando = document.querySelector('.adicionando');
-  const textarea = document.querySelector('.caixa_texto');
-  const kanbanCards = document.querySelector('.kanban-cards');
-
   let dragCard = null;
 
-  function addDragEvents(card) {
+  cards.forEach((card) => {
     card.addEventListener('dragstart', (e) => {
       dragCard = card;
       e.currentTarget.classList.add('dragging');
@@ -19,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('dragging');
       dragCard = null;
     });
-  }
-  cards.forEach((card) => addDragEvents(card));
+  });
 
   colunas.forEach((coluna) => {
     coluna.addEventListener('dragover', (e) => {
@@ -45,53 +40,28 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         const selecionadoPrioridade = radio.nextElementSibling.textContent;
+        console.log(selecionadoPrioridade);
       }
     });
   });
 
   mais.forEach((adicionar) => {
     adicionar.addEventListener('click', function () {
-      adicionando.style.display = 'flex';
+      if (adicionando.classList.contains('show')) {
+        adicionando.classList.remove('show');
+        setTimeout(() => {
+          adicionando.style.display = 'none';
+        }, 500);
+      } else {
+        adicionando.style.display = 'flex';
+        setTimeout(() => {
+          adicionando.classList.add('show');
+        }, 10);
+      }
     });
-  });
-
-  ok.addEventListener('click', function () {
-    const novoCard = document.createElement('div');
-    novoCard.className = 'kanban-card';
-    novoCard.draggable = true;
-
-    novoCard.innerHTML = `
-        <div class="badge medium">
-            <span>outro teste</span>
-        </div>
-        <p class="card-title">teste</p>
-        <div class="card-infos">
-            <div class="card-icons">
-                <p>
-                    <i class="fa-solid fa-trash"></i>
-                </p>
-                <p>
-                    <i class="fa-solid fa-pen"></i>
-                </p>
-            </div>
-            <div class="user">
-                <img src="images/iconePerfil2.png" alt="avatar2" />
-            </div>
-        </div>
-    `;
-
-    kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
-
-    adicionando.style.display = 'none';
   });
 
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
-  });
-
-  textarea.addEventListener('blur', function () {
-    const textareavalue = this.value;
-    console.log(textareavalue);
   });
 });

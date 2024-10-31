@@ -6,18 +6,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const ok = document.querySelector('.okButton');
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
+  const kanbanCard = document.querySelector('.kanban-card');
   const kanbanCards = document.querySelector('.kanban-cards');
 
   let dragCard = null;
 
   function addDragEvents(card) {
-    card.addEventListener('dragstart', (e) => {
-      dragCard = card;
-      e.currentTarget.classList.add('dragging');
-    });
-    card.addEventListener('dragend', (e) => {
-      e.currentTarget.classList.remove('dragging');
-      dragCard = null;
+    cards.forEach((card) => {
+      card.addEventListener('dragstart', (e) => {
+        dragCard = card;
+        e.currentTarget.classList.add('dragging');
+      });
+      card.addEventListener('dragend', (e) => {
+        e.currentTarget.classList.remove('dragging');
+        dragCard = null;
+      });
     });
   }
   cards.forEach((card) => addDragEvents(card));
@@ -81,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
 
     kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
 
     adicionando.style.display = 'none';
   });

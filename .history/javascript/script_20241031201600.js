@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const ok = document.querySelector('.okButton');
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
+  const kanbanCard = document.querySelector('.kanban-card');
   const kanbanCards = document.querySelector('.kanban-cards');
 
   let dragCard = null;

@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const ok = document.querySelector('.okButton');
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
-  const kanbanCards = document.querySelector('.kanban-cards');
+  const kanbanCard = document.querySelector('.kanban-card');
 
   let dragCard = null;
 
-  function addDragEvents(card) {
+  cards.forEach((card) => {
     card.addEventListener('dragstart', (e) => {
       dragCard = card;
       e.currentTarget.classList.add('dragging');
@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('dragging');
       dragCard = null;
     });
-  }
-  cards.forEach((card) => addDragEvents(card));
+  });
 
   colunas.forEach((coluna) => {
     coluna.addEventListener('dragover', (e) => {
@@ -56,33 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   ok.addEventListener('click', function () {
-    const novoCard = document.createElement('div');
-    novoCard.className = 'kanban-card';
-    novoCard.draggable = true;
-
-    novoCard.innerHTML = `
-        <div class="badge medium">
-            <span>outro teste</span>
-        </div>
-        <p class="card-title">teste</p>
-        <div class="card-infos">
-            <div class="card-icons">
-                <p>
-                    <i class="fa-solid fa-trash"></i>
-                </p>
-                <p>
-                    <i class="fa-solid fa-pen"></i>
-                </p>
+    kanbanCard.innerHTML = `<div class="badge medium">
+              <span>outro teste</span>
             </div>
-            <div class="user">
+            <p class="card-title">teste </p>
+            <div class="card-infos">
+              <div class="card-icons">
+                <p>
+                  <i class="fa-solid fa-trash"></i>
+                </p>
+                <p>
+                  <i class="fa-solid fa-pen"></i>
+                </p>
+              </div>
+              <div class="user">
                 <img src="images/iconePerfil2.png" alt="avatar2" />
-            </div>
-        </div>
-    `;
-
-    kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
-
+              </div>
+            </div>`;
     adicionando.style.display = 'none';
   });
 

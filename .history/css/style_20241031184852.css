@@ -165,10 +165,9 @@ body {
 }
 
 .adicionando {
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 3.5rem;
   position: fixed;
   top: 50%;
@@ -177,14 +176,12 @@ body {
   width: 50rem;
   height: 35rem;
   border-radius: 1rem;
-  box-shadow: inset -0.5rem -0.5rem 2rem 0.5rem rgba(0, 0, 0, 0.2);
-  background: linear-gradient(150deg, #93c5fd, #a5b4fc);
+  background: linear-gradient(90deg, #a5b4fc, #93c5fd);
 }
-
 .opcoes {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .custom_radio input[type='radio'] {
@@ -195,7 +192,7 @@ body {
   display: inline-block;
   margin: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease;
   background-color: #43b494;
   color: #ffffff;
   width: fit-content;
@@ -205,11 +202,7 @@ body {
 }
 
 .custom_radio input[type='radio']:checked + label {
-  box-shadow: 0 0.5rem 0.5rem 0.2rem rgba(0, 0, 0, 0.2);
-}
-
-label:hover {
-  transform: scale(1.1);
+  box-shadow: 0 0.5rem 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 #alta_prioridade:checked + label {
@@ -235,20 +228,10 @@ label:hover {
 .caixa_texto {
   width: 30rem;
   height: 15rem;
-  padding: 1rem;
-  border: 0;
-  resize: none;
-  box-shadow: inset 0 0 1.5rem 0.2rem #00000033;
 }
 
 .caixa_texto::placeholder {
-  text-align: start;
-}
-
-.caixa_texto:focus {
-  outline: none;
-  box-shadow: inset 0 0 1.5rem 0.2rem transparent;
-  border: 2px solid #998fe8;
+  text-align: center;
 }
 
 .buttons {
@@ -265,15 +248,15 @@ label:hover {
   border-radius: 5rem;
   padding: 0.6rem 0.8rem;
   width: 9rem;
-  box-shadow: 0 0.5rem 0.5rem 0.2rem rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 5px 2px rgba(0, 0, 0, 0.2);
 }
 
 .okButton {
-  background-color: #6ac96f;
+  background-color: #81c784;
   box-shadow: inset 0 0.5rem 0.5rem 0.2rem transparent;
   transition: all 0.3s ease;
   &:hover {
-    box-shadow: inset 0.2rem -0.5rem 1rem 0.1rem #52b957;
+    box-shadow: inset 0.2rem -0.5rem 0.5rem 0.2rem #66bb6a;
     transform: scale(1.1);
   }
 }
@@ -282,7 +265,7 @@ label:hover {
   box-shadow: inset 0 0.5rem 0.5rem 0.2rem transparent;
   transition: all 0.3s ease;
   &:hover {
-    box-shadow: inset 0.2rem -0.5rem 1rem 0.1rem #d63d3d;
+    box-shadow: inset 0.2rem -0.5rem 0.5rem 0.2rem #66bb6a;
     transform: scale(1.1);
   }
 }
