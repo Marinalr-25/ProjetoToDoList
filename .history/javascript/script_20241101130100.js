@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
   const kanbanCards = document.querySelector('.kanban-cards');
+  const badge = document.querySelector('.badge');
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
 
@@ -59,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
         return 'medium';
       case 'Baixa prioridade':
         return 'low';
-      default:
-        return null;
+      case '':
+        return alert('Selecione uma opção');
     }
   }
 
@@ -79,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
       radios.forEach((radio) => {
         radio.checked = false;
       });
-      selecionadoPrioridade = '';
       adicionando.style.display = 'flex';
     });
   });
@@ -95,10 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.draggable = true;
 
     const prioridadeClasse = corPrioridade();
-    if (prioridadeClasse === null) {
-      alert('Por favor, selecione uma prioridade.');
-      return;
-    }
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
 

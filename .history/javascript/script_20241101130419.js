@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const adicionando = document.querySelector('.adicionando');
   const textarea = document.querySelector('.caixa_texto');
   const kanbanCards = document.querySelector('.kanban-cards');
+  const badge = document.querySelector('.badge');
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
 

@@ -139,20 +139,15 @@ body {
   opacity: 0.5;
 }
 
-.card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
 .card-infos {
   display: flex;
   justify-content: space-between;
-  align-items: start;
-  gap: 0.8rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 .card-icons {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.8rem;
   & i {
     color: #a8a8aa;
   }
@@ -172,10 +167,10 @@ body {
 
 .adicionando {
   padding: 2rem;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 3.5rem;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -234,42 +229,27 @@ label:hover {
   transform: scale(1.1);
 }
 
-.title {
-  display: flex;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-}
-
-.title::placeholder {
-  text-align: center;
-}
-
-.title,
-.caixa_texto {
-  border: 0;
-  resize: none;
-}
-
-.title:focus,
-.caixa_texto:focus {
-  outline: none;
-  box-shadow: inset 0 0 1.5rem 0.2rem transparent;
-  border: 2px solid #998fe8;
-}
-
 .descricao {
   display: flex;
   justify-content: center;
 }
 .caixa_texto {
   width: 30rem;
-  height: 10rem;
+  height: 15rem;
   padding: 1rem;
+  border: 0;
+  resize: none;
   box-shadow: inset 0 0 1.5rem 0.2rem #00000033;
 }
 
 .caixa_texto::placeholder {
   text-align: start;
+}
+
+.caixa_texto:focus {
+  outline: none;
+  box-shadow: inset 0 0 1.5rem 0.2rem transparent;
+  border: 2px solid #998fe8;
 }
 
 .buttons {

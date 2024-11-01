@@ -147,7 +147,7 @@ body {
 .card-infos {
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: center;
   gap: 0.8rem;
 }
 .card-icons {
