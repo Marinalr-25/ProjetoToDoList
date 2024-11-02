@@ -113,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
   });
-  cancelar.addEventListener('click', function () {
-    adicionando.style.display = 'none';
-  });
 
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
@@ -156,16 +153,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
     novoCard.innerHTML = conteudoCard;
 
+    updatelocalStorage(conteudoCard);
+
     kanbanCards.append(novoCard);
     addDragEvents(novoCard);
 
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  cancelar.addEventListener('click', function () {
+    adicionando.style.display = 'none';
+  });
+
+  function updatelocalStorage(conteudoCard, colunaId) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.push({ conteudo: conteudoCard, coluna: colunaId });
+
+    localStorage.setItem('kanban-card', JSON.stringify(cardList));
+  }
+
+  function loadCards() {
+    const cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.forEach((cardData) => {
+      const novoCard = document.createElement('div');
+      novoCard.className = 'kanban-card';
+      novoCard.draggable = true;
+
+      novoCard.innerHTML = cardData.conteudo;
+      kanbanCards[cardData.coluna - 1].append(novoCard);
+      addDragEvents(novoCard);
+    });
+  }
+
+  function updateCardPositionInLocalStorage(card, colunaId) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+    const cardContent = card.innerHTML; // Obtenha o conteúdo do card
+    // Encontre o card correspondente e atualize a coluna
+    const cardIndex = cardList.findIndex((c) => c.conteudo === cardContent);
+    if (cardIndex !== -1) {
+      cardList[cardIndex].coluna = colunaId;
+      localStorage.setItem('kanban-card', JSON.stringify(cardList));
+    }
+  }
+  loadCards();
 });

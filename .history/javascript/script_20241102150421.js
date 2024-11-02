@@ -113,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
   });
-  cancelar.addEventListener('click', function () {
-    adicionando.style.display = 'none';
-  });
 
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
@@ -134,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
 
-    const conteudoCard = `
+    let conteudoCard = `
         <div class= "badge ${prioridadeClasse}">
             <span>${selecionadoPrioridade} </span>
         </div>
@@ -162,10 +159,14 @@ document.addEventListener('DOMContentLoaded', function () {
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  cancelar.addEventListener('click', function () {
+    adicionando.style.display = 'none';
+  });
+
+  function updatelocalStorage() {
+    localStorage.setItem('cardnew', conteudoCard);
+  }
+
+  localStorage.getItem('cardnew');
+  updatelocalStorage();
 });

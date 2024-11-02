@@ -50,7 +50,8 @@ body {
   box-shadow: 0 1rem 1.5rem -0.3rem rgba(0, 0, 0, 0.1);
   padding: 1.2rem;
   overflow: hidden;
-  width: 26rem;
+  min-width: 25.2rem;
+  max-width: 47rem;
   position: relative;
 
   &::after {
@@ -248,7 +249,6 @@ label:hover {
 .caixa_texto {
   border: 0;
   resize: none;
-  border-radius: 1.2rem;
 }
 
 .title:focus,

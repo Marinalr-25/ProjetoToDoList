@@ -113,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
   });
-  cancelar.addEventListener('click', function () {
-    adicionando.style.display = 'none';
-  });
 
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
@@ -162,10 +159,15 @@ document.addEventListener('DOMContentLoaded', function () {
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  cancelar.addEventListener('click', function () {
+    adicionando.style.display = 'none';
+  });
+
+  function updatelocalStorage(novoCard) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.push(novoCard);
+
+    localStorage.setItem('cards', JSON.stringify(cardList));
+  }
 });

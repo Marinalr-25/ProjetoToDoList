@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        const colunaId = index + 1;
+        updateCardPositionInLocalStorage(dragCard, colunaId);
       }
     });
   });
@@ -156,11 +158,48 @@ document.addEventListener('DOMContentLoaded', function () {
 
     novoCard.innerHTML = conteudoCard;
 
-    kanbanCards.append(novoCard);
+    const colunaId = 1;
+    updatelocalStorage(conteudoCard, colunaId);
+
+    kanbanCards[colunaId - 1].append(novoCard);
     addDragEvents(novoCard);
 
     adicionando.style.display = 'none';
   });
+
+  function updatelocalStorage(conteudoCard, colunaId) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.push({ conteudo: conteudoCard, coluna: colunaId });
+
+    localStorage.setItem('kanban-card', JSON.stringify(cardList));
+  }
+
+  function loadCards() {
+    const cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.forEach((cardData) => {
+      const novoCard = document.createElement('div');
+      novoCard.className = 'kanban-card';
+      novoCard.draggable = true;
+
+      novoCard.innerHTML = cardData.conteudo;
+      kanbanCards[cardData.coluna - 1].append(novoCard);
+      addDragEvents(novoCard);
+    });
+  }
+
+  function updateCardPositionInLocalStorage(card, colunaId) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+    const cardContent = card.innerHTML; // Obtenha o conteúdo do card
+    // Encontre o card correspondente e atualize a coluna
+    const cardIndex = cardList.findIndex((c) => c.conteudo === cardContent);
+    if (cardIndex !== -1) {
+      cardList[cardIndex].coluna = colunaId;
+      localStorage.setItem('kanban-card', JSON.stringify(cardList));
+    }
+  }
+  loadCards();
 
   // document
   //   .getElementById('clear-storage')

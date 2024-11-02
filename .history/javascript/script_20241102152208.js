@@ -113,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
   });
-  cancelar.addEventListener('click', function () {
-    adicionando.style.display = 'none';
-  });
 
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
@@ -162,10 +159,30 @@ document.addEventListener('DOMContentLoaded', function () {
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  cancelar.addEventListener('click', function () {
+    adicionando.style.display = 'none';
+  });
+
+  function updatelocalStorage(conteudoCard) {
+    let cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.push(conteudoCard);
+
+    localStorage.setItem('kanban-card', JSON.stringify(cardList));
+  }
+
+  function loadCards() {
+    const cardList = JSON.parse(localStorage.getItem('kanban-card')) || [];
+
+    cardList.forEach((cardData) => {
+      const conteudoCard = document.createElement('div');
+      conteudoCard.className = 'kanban-card';
+      conteudoCard.draggable = true;
+
+      conteudoCard.innerHTML = conteudoCard;
+      kanbanCards.append(conteudoCard);
+      addDragEvents(conteudoCard);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', loadCards);
 });

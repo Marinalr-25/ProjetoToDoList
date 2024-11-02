@@ -50,7 +50,7 @@ body {
   box-shadow: 0 1rem 1.5rem -0.3rem rgba(0, 0, 0, 0.1);
   padding: 1.2rem;
   overflow: hidden;
-  width: 26rem;
+  width: 25.2rem;
   position: relative;
 
   &::after {

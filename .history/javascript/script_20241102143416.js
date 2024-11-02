@@ -113,9 +113,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
   });
-  cancelar.addEventListener('click', function () {
-    adicionando.style.display = 'none';
-  });
 
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
@@ -123,18 +120,18 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.draggable = true;
 
     const prioridadeClasse = corPrioridade();
-    const campoTexto = textarea.value;
     if (prioridadeClasse === null) {
       alert('Por favor, selecione uma prioridade.');
       return;
-    } else if (campoTexto === '') {
+    }
+    if (textareavalue === '') {
       alert('Por favor, descreva sua tarefa.');
       return;
     }
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
 
-    const conteudoCard = `
+    novoCard.innerHTML = `
         <div class= "badge ${prioridadeClasse}">
             <span>${selecionadoPrioridade} </span>
         </div>
@@ -154,18 +151,17 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `;
 
-    novoCard.innerHTML = conteudoCard;
-
     kanbanCards.append(novoCard);
     addDragEvents(novoCard);
 
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  cancelar.addEventListener('click', function () {
+    adicionando.style.display = 'none';
+  });
+
+  function updatelocalStorage() {
+    localStorage.getItem();
+  }
 });

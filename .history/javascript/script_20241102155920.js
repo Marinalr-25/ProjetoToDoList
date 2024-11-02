@@ -162,10 +162,10 @@ document.addEventListener('DOMContentLoaded', function () {
     adicionando.style.display = 'none';
   });
 
-  // document
-  //   .getElementById('clear-storage')
-  //   .addEventListener('click', function () {
-  //     localStorage.clear();
-  //     alert('Local storage limpo!');
-  //   });
+  document
+    .getElementById('clear-storage')
+    .addEventListener('click', function () {
+      localStorage.clear();
+      alert('Local storage limpo!');
+    });
 });
