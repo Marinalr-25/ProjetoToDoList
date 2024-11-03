@@ -10,12 +10,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
 
+
   let dragCard = null;
   let selecionadoPrioridade = '';
+
 
   function updateAvatarImage(card) {
     const column = card.closest('.kanban-column');
     const avatarImage = card.querySelector('.user img');
+
 
     // Define a imagem com base no `data-id` da coluna
     switch (column.getAttribute('data-id')) {
@@ -37,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+
   function addDragEvents(card) {
     card.addEventListener('dragstart', (e) => {
       dragCard = card;
@@ -48,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
       dragCard = null;
     });
   }
+
 
   cards.forEach((card) => addDragEvents(card));
   colunas.forEach((coluna) => {
@@ -67,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+
   radios.forEach((radio) => {
     radio.addEventListener('change', () => {
       if (radio.checked) {
@@ -75,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
 
   function corPrioridade() {
     switch (selecionadoPrioridade) {
@@ -89,13 +96,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+
   function titulo() {
     return title.value;
   }
 
+
   function descricaotarefa() {
     return textarea.value;
   }
+
 
   mais.forEach((adicionar) => {
     adicionar.addEventListener('click', function () {
@@ -109,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+
   textarea.addEventListener('blur', function () {
     const textareavalue = this.value;
     console.log(textareavalue);
@@ -117,10 +128,12 @@ document.addEventListener('DOMContentLoaded', function () {
     adicionando.style.display = 'none';
   });
 
+
   ok.addEventListener('click', function () {
     const novoCard = document.createElement('div');
     novoCard.className = 'kanban-card';
     novoCard.draggable = true;
+
 
     const prioridadeClasse = corPrioridade();
     const campoTexto = textarea.value;
@@ -133,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
+
 
     const conteudoCard = `
         <div class= "badge ${prioridadeClasse}">
@@ -154,42 +168,46 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     `;
 
+
     novoCard.innerHTML = conteudoCard;
+
 
     kanbanCards.append(novoCard);
 
     addDragEvents(novoCard);
     // Salvar card no localStorage
 
-    saveCard({
-      titulo: tituloCaixa,
-      descricao: descricao,
-      prioridade: selecionadoPrioridade,
-      classe: prioridadeClasse,
-    });
 
-    adicionando.style.display = 'none';
-  });
+saveCard({
+  titulo: tituloCaixa,
+  descricao: descricao,
+  prioridade: selecionadoPrioridade,
+  classe: prioridadeClasse,
+});
 
-  function saveCard(card) {
-    const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    cards.push(card);
-    localStorage.setItem('cards', JSON.stringify(cards));
-  }
 
-  function loadCards() {
-    const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    cards.forEach((card) => {
-      const novoCard = document.createElement('div');
-      novoCard.className = 'kanban-card';
-      novoCard.draggable = true;
+  adicionando.style.display = 'none';
+});
 
-      const conteudoCard = `
-        <div class= "badge ${card.classe}">
-            <span>${card.prioridade} </span>
+
+function saveCard(card) {
+  const cards = JSON.parse(localStorage.getItem('cards')) || [];
+  cards.push(card);
+  localStorage.setItem('cards', JSON.stringify(cards));
+}
+
+
+function loadCards() {
+  const cards = JSON.parse(localStorage.getItem('cards')) || [];
+  cards.forEach(card => {
+    const novoCard = document.createElement('div');
+
+    const conteudoCard = `
+        <div class="badge ${card.classe}">
+            <span>${card.prioridade}</span>
         </div>
-        <p class="card-title">${card.titulo} </p>
-        <div class="card-infos"> ${card.descricao}
+        <p class="card-title">${card.titulo}</p>
+        <div class="card-infos">${card.descricao}
             <div class="card-icons">
                 <p>
                     <i class="fa-solid fa-trash"></i>
@@ -199,16 +217,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 </p>
             </div>
             <div class="user">
-                <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
-            </div>
-        </div>
-  `;
 
-      novoCard.innerHTML = conteudoCard;
-      kanbanCards.append(novoCard);
-      addDragEvents(novoCard);
-    });
-  }
 
-  loadCards();
-});
+

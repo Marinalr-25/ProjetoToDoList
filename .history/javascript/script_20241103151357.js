@@ -156,59 +156,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
     novoCard.innerHTML = conteudoCard;
 
+    updatelocalStorage(conteudoCard);
+
     kanbanCards.append(novoCard);
-
     addDragEvents(novoCard);
-    // Salvar card no localStorage
-
-    saveCard({
-      titulo: tituloCaixa,
-      descricao: descricao,
-      prioridade: selecionadoPrioridade,
-      classe: prioridadeClasse,
-    });
 
     adicionando.style.display = 'none';
   });
 
-  function saveCard(card) {
-    const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    cards.push(card);
-    localStorage.setItem('cards', JSON.stringify(cards));
+  // document
+  //   .getElementById('clear-storage')
+  //   .addEventListener('click', function () {
+  //     localStorage.clear();
+  //     alert('Local storage limpo!');
+  //   });
+  function updatelocalStorage(conteudoCard) {
+    let kanbanCriado = JSON.parse(localStorage.getItem('kanban-card')) || [];
+    let cardList = kanbanCriado;
+
+    cardList.push(conteudoCard);
+
+    localStorage.setItem('kanban-card', JSON.stringify(cardList));
   }
 
   function loadCards() {
-    const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    cards.forEach((card) => {
+    cardList.forEach((cardData) => {
       const novoCard = document.createElement('div');
       novoCard.className = 'kanban-card';
       novoCard.draggable = true;
-
-      const conteudoCard = `
-        <div class= "badge ${card.classe}">
-            <span>${card.prioridade} </span>
-        </div>
-        <p class="card-title">${card.titulo} </p>
-        <div class="card-infos"> ${card.descricao}
-            <div class="card-icons">
-                <p>
-                    <i class="fa-solid fa-trash"></i>
-                </p>
-                <p>
-                    <i class="fa-solid fa-pen"></i>
-                </p>
-            </div>
-            <div class="user">
-                <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
-            </div>
-        </div>
-  `;
-
-      novoCard.innerHTML = conteudoCard;
-      kanbanCards.append(novoCard);
-      addDragEvents(novoCard);
+      novoCard.innerHTML = cardData;
+      kanbanCards.appendChild(cardData);
+      addDragEvents(cardData);
     });
   }
-
-  loadCards();
+  document.addEventListener('DOMContentLoaded', loadCards());
 });

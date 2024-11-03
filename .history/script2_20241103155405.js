@@ -181,10 +181,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];
     cards.forEach((card) => {
       const novoCard = document.createElement('div');
-      novoCard.className = 'kanban-card';
-      novoCard.draggable = true;
 
       const conteudoCard = `
+      <div class="kanban-card" draggble="true"
         <div class= "badge ${card.classe}">
             <span>${card.prioridade} </span>
         </div>
@@ -202,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
             </div>
         </div>
+      </div>
   `;
 
       novoCard.innerHTML = conteudoCard;
