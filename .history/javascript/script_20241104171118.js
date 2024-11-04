@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -225,7 +226,6 @@ document.addEventListener('DOMContentLoaded', function () {
       novoCard.innerHTML = conteudoCard;
       kanbanCards.append(novoCard);
       addDragEvents(novoCard);
-      updateAvatarImage(novoCard);
     });
   }
 

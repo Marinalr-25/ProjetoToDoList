@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -134,9 +135,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
 
-    const cardID = generateCardID();
-    novoCard.setAttribute('data-id', cardID);
-
     const conteudoCard = `
         <div class= "badge ${prioridadeClasse}">
             <span>${selecionadoPrioridade} </span>
@@ -158,17 +156,18 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
 
     novoCard.innerHTML = conteudoCard;
-    kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
 
+    kanbanCards.append(novoCard);
+
+    addDragEvents(novoCard);
     // Salvar card no localStorage
+
     saveCard({
-      id: cardID,
       titulo: tituloCaixa,
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: '1';
     });
 
     adicionando.style.display = 'none';
@@ -180,27 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('cards', JSON.stringify(cards));
   }
 
-  function generateCardID() {
-    return `card-${Math.floor(Math.random() * 1000000)}`;
-  }
-
-  function saveCardPosition(card, colunaId) {
-    const cardID = card.getAttribute('data-id');
-    const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    const cardData = cards.find((c) => c.id === cardID);
-    if (cardData) {
-      cardData.coluna = colunaId;
-      localStorage.setItem('cards', JSON.stringify(cards));
-    }
-  }
-
   function loadCards() {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];
     cards.forEach((card) => {
       const novoCard = document.createElement('div');
       novoCard.className = 'kanban-card';
       novoCard.draggable = true;
-      novoCard.setAttribute('data-id', card.id);
 
       const conteudoCard = `
         <div class= "badge ${card.classe}">
@@ -225,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
       novoCard.innerHTML = conteudoCard;
       kanbanCards.append(novoCard);
       addDragEvents(novoCard);
-      updateAvatarImage(novoCard);
     });
   }
 

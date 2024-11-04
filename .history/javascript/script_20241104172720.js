@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -168,11 +169,37 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: colunaId,
     });
 
     adicionando.style.display = 'none';
   });
+
+  function pegarColunaCard(card) {
+    const column = card.closest('.kanban-column');
+    const coluna = JSON.parse(localStorage.getItem('coluna')) || [];
+
+    // Define a imagem com base no `data-id` da coluna
+    switch (column.getAttribute('data-id')) {
+      case '1':
+        coluna.coluna = '1';
+        break;
+      case '2':
+        coluna.coluna = '2';
+        break;
+      case '3':
+        coluna.coluna = '3';
+        break;
+      case '4':
+        coluna.coluna = '4';
+        break;
+      case '5':
+        coluna.coluna = '5';
+        break;
+    }
+  }
+
+  const colunaId = pegarColunaCard(cardId);
 
   function saveCard(card) {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];

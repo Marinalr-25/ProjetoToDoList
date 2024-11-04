@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -96,6 +97,13 @@ document.addEventListener('DOMContentLoaded', function () {
   function descricaotarefa() {
     return textarea.value;
   }
+
+  function getAvoDataId(neto) {
+    const avo = neto.closest('.kanban-column');
+    return avo ? avo.getAttribute('data-id') : null;
+  }
+
+  const colunaId = getAvoDataId(cards);
 
   mais.forEach((adicionar) => {
     adicionar.addEventListener('click', function () {
@@ -168,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: colunaId,
     });
 
     adicionando.style.display = 'none';

@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -173,6 +174,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     adicionando.style.display = 'none';
   });
+
+  function pegarColunaCard(card) {
+    const column = card.closest('.kanban-column');
+    const avatarImage = card.querySelector('.user img');
+
+    // Define a imagem com base no `data-id` da coluna
+    switch (column.getAttribute('data-id')) {
+      case '1':
+        localStorage.coluna = '1';
+        break;
+      case '2':
+        localStorage.coluna = '2';
+        break;
+      case '3':
+        localStorage.coluna = '3';
+        break;
+      case '4':
+        localStorage.coluna = '4';
+        break;
+      case '5':
+        localStorage.coluna = '5';
+        break;
+    }
+  }
 
   function saveCard(card) {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];

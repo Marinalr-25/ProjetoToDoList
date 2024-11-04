@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -173,6 +174,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     adicionando.style.display = 'none';
   });
+
+  function pegarColunaCard(card) {
+    const column = card.closest('.kanban-column');
+    const avatarImage = card.querySelector('.user img');
+
+    // Define a imagem com base no `data-id` da coluna
+    switch (column.getAttribute('data-id')) {
+      case '1':
+        avatarImage.src = 'images/iconePerfilPlanejamento.png';
+        break;
+      case '2':
+        avatarImage.data = 'images/iconePerfilPendente.png';
+        break;
+      case '3':
+        avatarImage.src = 'images/iconePerfilEmAndamento.png';
+        break;
+      case '4':
+        avatarImage.src = 'images/iconePerfilFinalizada.png';
+        break;
+      case '5':
+        avatarImage.src = 'images/iconePerfilCancelada.png';
+        break;
+    }
+  }
 
   function saveCard(card) {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];

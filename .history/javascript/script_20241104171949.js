@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -168,11 +169,17 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: ,
     });
 
     adicionando.style.display = 'none';
   });
+
+  function getAvoDataId(neto) {
+    const avo = neto.closest('.kanban-column');
+    return avo ? avo.getAttribute('data-id') : null;
+  }
+
 
   function saveCard(card) {
     const cards = JSON.parse(localStorage.getItem('cards')) || [];

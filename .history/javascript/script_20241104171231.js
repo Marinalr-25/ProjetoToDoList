@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const column = card.closest('.kanban-column');
     const avatarImage = card.querySelector('.user img');
 
-    // Define a imagem com base no `data-id` da coluna
     switch (column.getAttribute('data-id')) {
       case '1':
         avatarImage.src = 'images/iconePerfilPlanejamento.png';
@@ -49,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  cards.forEach((card) => addDragEvents(card));
   colunas.forEach((coluna) => {
     coluna.addEventListener('dragover', (e) => {
       e.preventDefault();
@@ -63,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -71,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         selecionadoPrioridade = radio.nextElementSibling.textContent;
-        console.log(selecionadoPrioridade);
       }
     });
   });
@@ -109,10 +107,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  textarea.addEventListener('blur', function () {
-    const textareavalue = this.value;
-    console.log(textareavalue);
-  });
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
   });
@@ -123,14 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.draggable = true;
 
     const prioridadeClasse = corPrioridade();
-    const campoTexto = textarea.value;
     if (prioridadeClasse === null) {
       alert('Por favor, selecione uma prioridade.');
       return;
-    } else if (campoTexto === '') {
+    } else if (textarea.value === '') {
       alert('Por favor, descreva sua tarefa.');
       return;
     }
+
     const tituloCaixa = titulo();
     const descricao = descricaotarefa();
 
@@ -138,21 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.setAttribute('data-id', cardID);
 
     const conteudoCard = `
-        <div class= "badge ${prioridadeClasse}">
-            <span>${selecionadoPrioridade} </span>
+        <div class="badge ${prioridadeClasse}">
+            <span>${selecionadoPrioridade}</span>
         </div>
-        <p class="card-title">${tituloCaixa} </p>
-        <div class="card-infos"> ${descricao}
+        <p class="card-title">${tituloCaixa}</p>
+        <div class="card-infos">${descricao}
             <div class="card-icons">
-                <p>
-                    <i class="fa-solid fa-trash"></i>
-                </p>
-                <p>
-                    <i class="fa-solid fa-pen"></i>
-                </p>
+                <p><i class="fa-solid fa-trash"></i></p>
+                <p><i class="fa-solid fa-pen"></i></p>
             </div>
             <div class="user">
-                <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
+                <img src="images/iconePerfilPlanejamento.png" alt="avatar" />
             </div>
         </div>
     `;
@@ -161,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
     kanbanCards.append(novoCard);
     addDragEvents(novoCard);
 
-    // Salvar card no localStorage
     saveCard({
       id: cardID,
       titulo: tituloCaixa,
@@ -203,29 +192,27 @@ document.addEventListener('DOMContentLoaded', function () {
       novoCard.setAttribute('data-id', card.id);
 
       const conteudoCard = `
-        <div class= "badge ${card.classe}">
-            <span>${card.prioridade} </span>
+        <div class="badge ${card.classe}">
+            <span>${card.prioridade}</span>
         </div>
-        <p class="card-title">${card.titulo} </p>
-        <div class="card-infos"> ${card.descricao}
+        <p class="card-title">${card.titulo}</p>
+        <div class="card-infos">${card.descricao}
             <div class="card-icons">
-                <p>
-                    <i class="fa-solid fa-trash"></i>
-                </p>
-                <p>
-                    <i class="fa-solid fa-pen"></i>
-                </p>
+                <p><i class="fa-solid fa-trash"></i></p>
+                <p><i class="fa-solid fa-pen"></i></p>
             </div>
             <div class="user">
-                <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
+                <img src="images/iconePerfilPlanejamento.png" alt="avatar" />
             </div>
         </div>
-  `;
+      `;
 
       novoCard.innerHTML = conteudoCard;
-      kanbanCards.append(novoCard);
+      document
+        .querySelector(`.kanban-cards[data-id="${card.coluna}"]`)
+        .append(novoCard);
       addDragEvents(novoCard);
-      updateAvatarImage(novoCard);
+      updateAvatarImage(novoCard); // Atualiza a imagem ao carregar o card na coluna correta
     });
   }
 

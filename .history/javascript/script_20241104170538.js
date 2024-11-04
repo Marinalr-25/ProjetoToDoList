@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
+        saveCardPosition(dragCard, e.currentTarget.getAttribute('data-id'));
       }
     });
   });
@@ -158,10 +159,12 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
 
     novoCard.innerHTML = conteudoCard;
-    kanbanCards.append(novoCard);
-    addDragEvents(novoCard);
 
+    kanbanCards.append(novoCard);
+
+    addDragEvents(novoCard);
     // Salvar card no localStorage
+
     saveCard({
       id: cardID,
       titulo: tituloCaixa,
@@ -185,11 +188,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function saveCardPosition(card, colunaId) {
-    const cardID = card.getAttribute('data-id');
     const cards = JSON.parse(localStorage.getItem('cards')) || [];
-    const cardData = cards.find((c) => c.id === cardID);
-    if (cardData) {
-      cardData.coluna = colunaId;
+    const cardIndex = Array.from(
+      document.querySelectorAll('.kanban-card')
+    ).indexOf(card);
+    if (cardIndex > -1) {
+      cards[cardIndex].coluna = colunaId;
       localStorage.setItem('cards', JSON.stringify(cards));
     }
   }
@@ -200,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const novoCard = document.createElement('div');
       novoCard.className = 'kanban-card';
       novoCard.draggable = true;
-      novoCard.setAttribute('data-id', card.id);
 
       const conteudoCard = `
         <div class= "badge ${card.classe}">
@@ -225,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function () {
       novoCard.innerHTML = conteudoCard;
       kanbanCards.append(novoCard);
       addDragEvents(novoCard);
-      updateAvatarImage(novoCard);
     });
   }
 
