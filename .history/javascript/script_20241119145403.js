@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const radios = document.querySelectorAll('input[name="prioridade"]');
   const kanbanColuna = document.querySelectorAll('.kanban-column');
 
+  function pegarColuna() {
+    kanbanColuna.forEach((coluna) => {
+      const dataId = coluna.getAttribute('data-id');
+    });
+  }
+
   let dragCard = null;
   let selecionadoPrioridade = '';
 
@@ -34,6 +40,29 @@ document.addEventListener('DOMContentLoaded', function () {
         break;
       case '5':
         avatarImage.src = 'images/iconePerfilCancelada.png';
+        break;
+    }
+  }
+  function alterarColuna(card) {
+    const column = card.closest('.kanban-column');
+    const colunaaa = localStorage.setItem('cards', JSON.stringify(cards));
+
+    // Define a imagem com base no `data-id` da coluna
+    switch (column.getAttribute('data-id')) {
+      case '1':
+        colunaaa = '1';
+        break;
+      case '2':
+        colunaaa = '2';
+        break;
+      case '3':
+        colunaaa = '3';
+        break;
+      case '4':
+        colunaaa = '4';
+        break;
+      case '5':
+        colunaaa = '5';
         break;
     }
   }
@@ -172,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: dataId,
     });
 
     adicionando.style.display = 'none';

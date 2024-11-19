@@ -64,9 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
-        pegarColuna();
-        // Atualizar no localStorage
-        saveCardPosition(dragCard, pegarColuna());
       }
     });
   });

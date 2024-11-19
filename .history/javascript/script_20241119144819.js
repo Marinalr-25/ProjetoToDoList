@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const radios = document.querySelectorAll('input[name="prioridade"]');
   const kanbanColuna = document.querySelectorAll('.kanban-column');
 
+  function pegarColuna() {
+    kanbanColuna.forEach((coluna) => {
+      const dataId = coluna.getAttribute('data-id');
+      console.log(dataId);
+    });
+  }
+
   let dragCard = null;
   let selecionadoPrioridade = '';
 
@@ -172,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: dataId,
     });
 
     adicionando.style.display = 'none';

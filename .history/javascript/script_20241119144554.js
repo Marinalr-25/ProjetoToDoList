@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
   const kanbanColuna = document.querySelectorAll('.kanban-column');
+  const dataId = kanbanColuna.getAttribute('data-id');
+  console.log(dataId);
 
   let dragCard = null;
   let selecionadoPrioridade = '';
@@ -64,9 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
-        pegarColuna();
+        // Atualizar o atributo data-id do card
+        const colunaId = e.currentTarget
+          .closest('.kanban-column')
+          .getAttribute('data-id');
+        dragCard.setAttribute('data-id', colunaId);
+
         // Atualizar no localStorage
-        saveCardPosition(dragCard, pegarColuna());
+        saveCardPosition(dragCard, colunaId);
       }
     });
   });
@@ -172,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: dataId,
     });
 
     adicionando.style.display = 'none';

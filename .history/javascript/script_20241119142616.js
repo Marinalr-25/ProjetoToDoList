@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const kanbanCards = document.querySelector('.kanban-cards');
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
-  const kanbanColuna = document.querySelectorAll('.kanban-column');
+  const dataId = document.
 
   let dragCard = null;
   let selecionadoPrioridade = '';
@@ -64,9 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
-        pegarColuna();
-        // Atualizar no localStorage
-        saveCardPosition(dragCard, pegarColuna());
       }
     });
   });
@@ -192,10 +189,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const cardID = card.getAttribute('data-id');
     const cards = JSON.parse(localStorage.getItem('cards')) || [];
     const cardData = cards.find((c) => c.id === cardID);
-
     if (cardData) {
-      cardData.coluna = colunaId; // Atualiza a coluna do card
-      localStorage.setItem('cards', JSON.stringify(cards)); // Salva no localStorage
+      cardData.coluna = colunaId;
+      localStorage.setItem('cards', JSON.stringify(cards));
     }
   }
 

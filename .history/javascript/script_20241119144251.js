@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const kanbanCards = document.querySelector('.kanban-cards');
   const title = document.getElementById('title');
   const radios = document.querySelectorAll('input[name="prioridade"]');
-  const kanbanColuna = document.querySelectorAll('.kanban-column');
+  const kanbanColuna = document.querySelector('.kanban-column');
+  const dataId = kanbanColuna.getAttribute('data-id');
+  console.log(dataId);
 
   let dragCard = null;
   let selecionadoPrioridade = '';
@@ -64,9 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
       e.currentTarget.classList.remove('cards-hover');
       if (dragCard) {
         e.currentTarget.appendChild(dragCard);
-        pegarColuna();
+        // Atualizar o atributo data-id do card
+        const colunaId = e.currentTarget
+          .closest('.kanban-column')
+          .getAttribute('data-id');
+        dragCard.setAttribute('data-id', colunaId);
+
         // Atualizar no localStorage
-        saveCardPosition(dragCard, pegarColuna());
+        saveCardPosition(dragCard, colunaId);
       }
     });
   });
@@ -164,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
     novoCard.innerHTML = conteudoCard;
     kanbanCards.append(novoCard);
     addDragEvents(novoCard);
+    console.log('Card ID:', cardID);
 
     // Salvar card no localStorage
     saveCard({
@@ -172,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
       descricao: descricao,
       prioridade: selecionadoPrioridade,
       classe: prioridadeClasse,
-      coluna: '1',
+      coluna: dataId,
     });
 
     adicionando.style.display = 'none';
@@ -197,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
       cardData.coluna = colunaId; // Atualiza a coluna do card
       localStorage.setItem('cards', JSON.stringify(cards)); // Salva no localStorage
     }
+    console.log('Card encontrado:', cardData);
   }
 
   function loadCards() {
@@ -235,4 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   loadCards();
+
+  console.log('Cards no localStorage:', cards);
 });
