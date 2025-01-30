@@ -33,7 +33,6 @@ body {
 .kanban {
   display: flex;
   gap: 1.4rem;
-  flex-wrap: wrap;
   justify-content: center;
   padding: 2.4rem;
   width: 100%;
@@ -54,10 +53,6 @@ body {
   overflow: hidden;
   width: 26rem;
   position: relative;
-
-  @media all and (max-width: 87.87em) {
-    height: 50%;
-  }
 
   &::after {
     position: absolute;

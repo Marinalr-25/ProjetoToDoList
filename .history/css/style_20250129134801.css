@@ -55,10 +55,6 @@ body {
   width: 26rem;
   position: relative;
 
-  @media all and (max-width: 87.87em) {
-    height: 50%;
-  }
-
   &::after {
     position: absolute;
     content: '';
