@@ -242,18 +242,8 @@ label:hover {
   background-color: #92a5fb;
 }
 
-.custom-radio input[type='radio']:checked > label {
+.custom-radio input[type='radio']:checked {
   transform: scale(1.2);
-}
-
-.custom_radio label {
-  border-radius: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.custom_radio input[type='radio']:checked + label {
-  transform: scale(1.1);
 }
 
 .title {
@@ -263,9 +253,7 @@ label:hover {
 }
 
 .title-input {
-  width: 20rem;
   height: 2.5rem;
-  padding: 0.8rem;
 }
 
 .title-input::placeholder {
@@ -296,6 +284,7 @@ label:hover {
   width: 30rem;
   height: 10rem;
   padding: 1rem;
+  box-shadow: inset 0 0 1.5rem 0.2rem #00000033;
 }
 
 .caixa_texto::placeholder {

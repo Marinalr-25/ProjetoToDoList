@@ -242,18 +242,8 @@ label:hover {
   background-color: #92a5fb;
 }
 
-.custom-radio input[type='radio']:checked > label {
+.custom-radio input[type='radio']:checked {
   transform: scale(1.2);
-}
-
-.custom_radio label {
-  border-radius: 1.2rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.custom_radio input[type='radio']:checked + label {
-  transform: scale(1.1);
 }
 
 .title {

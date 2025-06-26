@@ -249,11 +249,12 @@ label:hover {
 .custom_radio label {
   border-radius: 1.2rem;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.3s;
 }
 
 .custom_radio input[type='radio']:checked + label {
   transform: scale(1.1);
+  background-color: #dcd3ff; /* opcional: destaque visual */
 }
 
 .title {
