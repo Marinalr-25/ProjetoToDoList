@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         selecionadoPrioridade = radio.nextElementSibling.textContent;
+        console.log(selecionadoPrioridade);
       }
     });
   });
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   textarea.addEventListener('blur', function () {
     const textareavalue = this.value;
+    console.log(textareavalue);
   });
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
@@ -180,6 +182,28 @@ document.addEventListener('DOMContentLoaded', function () {
             </div>
         </div>
     `;
+
+    //         const conteudoCard = `
+    //       <div class= "badge ${card.classe}">
+    //           <span>${card.prioridade} </span>
+    //       </div>
+    //       <p class="card-title">${card.titulo} </p>
+    //       <div class="card-infos">
+    //         <div class="card-descricao">${card.descricao}
+    //         </div>
+    //           <div class="card-icons">
+    //               <div class="iconeDelete">
+    //                 <i class="fa-solid fa-trash"></i>
+    //               </div>
+    //               <div class="iconeEdit">
+    //                 <i class="fa-solid fa-pen"></i>
+    //               </div>
+    //           </div>
+    //           <div class="user">
+    //               <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
+    //           </div>
+    //       </div>
+    // `;
 
     novoCard.innerHTML = conteudoCard;
     kanbanCards.append(novoCard);
@@ -292,6 +316,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const popupDeleteDescricao = popupDelete.querySelector(
         '.popupDeletar__descricaoDelete'
       );
+      console.log(popupDelete);
+      console.log(popupDeletePrioridade);
+      console.log(popupDeleteDescricao);
+      console.log(popupDeleteTitulo);
 
       definirCorPrioridade(popupDeletePrioridade, prioridadeCard);
 

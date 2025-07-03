@@ -280,7 +280,7 @@ label:hover {
 .popupEditar__titulo {
   border: 0;
   resize: none;
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 1.2rem;
 }
 

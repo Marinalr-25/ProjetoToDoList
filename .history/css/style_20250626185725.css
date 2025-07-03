@@ -280,7 +280,6 @@ label:hover {
 .popupEditar__titulo {
   border: 0;
   resize: none;
-  border: 3px solid #ffffff;
   border-radius: 1.2rem;
 }
 
@@ -288,7 +287,7 @@ label:hover {
 .caixa_texto:focus {
   outline: none;
   box-shadow: inset 0 0 1.5rem 0.2rem transparent;
-  border: 3px solid #998fe8;
+  border: 2px solid #998fe8;
 }
 
 .descricao,
@@ -399,8 +398,7 @@ label:hover {
   height: max-content;
 }
 
-.popupDeletar__tituloDelete,
-.popupEditar__titulo {
+.popupDeletar__tituloDelete {
   width: max-content;
   height: 2.5rem;
   display: flex;
@@ -419,10 +417,9 @@ label:hover {
 }
 .popupDeletar__descricaoDelete,
 .popupEditar__descricao {
+  width: 30rem;
+  height: 10rem;
+  padding: 0.8rem;
   height: max-content;
   width: max-content;
-}
-
-.popupDeletar__descricaoDelete {
-  padding: 1rem;
 }

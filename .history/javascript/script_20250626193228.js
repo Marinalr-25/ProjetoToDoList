@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         selecionadoPrioridade = radio.nextElementSibling.textContent;
+        console.log(selecionadoPrioridade);
       }
     });
   });
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   textarea.addEventListener('blur', function () {
     const textareavalue = this.value;
+    console.log(textareavalue);
   });
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
@@ -157,17 +159,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const cardID = generateCardID();
     novoCard.setAttribute('data-id', cardID);
 
-    novoCard.setAttribute('data-id', cardID);
-
     const conteudoCard = `
         <div class= "badge ${prioridadeClasse}">
             <span>${selecionadoPrioridade} </span>
         </div>
         <p class="card-title">${tituloCaixa} </p>
         <div class="card-infos"> 
-          <div class="card-descricao">${descricao}
-          </div>
-          <div class="card-icons">
+        <div class="card-descricao">${descricao}
+        </div>
+
+            <div class="card-icons">
                 <div class="iconeDelete">
                   <i class="fa-solid fa-trash"></i>
                 </div>
@@ -222,8 +223,8 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
         <p class="card-title">${card.titulo} </p>
         <div class="card-infos">
-          <div class="card-descricao">${card.descricao}
-          </div>
+        <div class="card-descricao">${descricao}
+        </div>
             <div class="card-icons">
                 <div class="iconeDelete">
                   <i class="fa-solid fa-trash"></i>
@@ -276,12 +277,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const botaoDelete = e.target.closest('.iconeDelete');
     const botaoEdit = e.target.closest('.iconeEdit');
     if (botaoDelete) {
-      const popupDelete = document.querySelector('.popupDeletar');
       const esteItem = e.target.closest('.kanban-card');
       itemEditado = esteItem;
       const prioridadeCard = esteItem.querySelector('span');
       const tituloCard = esteItem.querySelector('.card-title').innerText;
-      const infosCard = esteItem.querySelector('.card-descricao').innerText;
+      const infosCard = esteItem.querySelector('.card-infos').innerText;
 
       const popupDeletePrioridade = popupDelete.querySelector(
         '.popupDeletar__prioridade'
@@ -302,12 +302,13 @@ document.addEventListener('DOMContentLoaded', function () {
       popupDelete.style.display = 'flex';
     }
     if (botaoEdit) {
+      console.log('foii o edite');
       popupEditar.style.display = 'flex';
       const esteItem = e.target.closest('.kanban-card');
       itemEditado = esteItem;
       const prioridadeCard = itemEditado.querySelector('span');
       const tituloCard = itemEditado.querySelector('.card-title').innerText;
-      const descricaoCard = itemEditado.querySelector('.card-descricao');
+      const descricaoCard = itemEditado.querySelector('.card-infos');
       const popupEditarPrioridade = popupEditar.querySelector(
         '.popupEditar__prioridade'
       );
@@ -315,22 +316,27 @@ document.addEventListener('DOMContentLoaded', function () {
         '.popupEditar__titulo'
       );
       const popupDeleteDescricao = popupEditar.querySelector(
-        '.popupEditar__descricao .caixa_texto'
+        '.popupEditar__descricao'
       );
+      console.log(prioridadeCard.innerText);
 
       definirCorPrioridade(popupEditarPrioridade, prioridadeCard);
 
       popupEditarPrioridade.textContent = prioridadeCard.innerText;
       popupDeleteTitulo.textContent = tituloCard;
-      popupDeleteDescricao.value = descricaoCard.innerText.trim();
+      descricaoCard.value = popupDeleteDescricao.textContent;
+      console.log(descricaoCard.value);
     }
   });
 
   const botaoSimDeletar = popupDelete.querySelector('.botaoSim');
 
   botaoSimDeletar.addEventListener('click', () => {
+    console.log(botaoSimDeletar, 'deletou');
+    console.log(itemEditado);
     if (itemEditado) {
       const idCardSelecionado = itemEditado.dataset.id;
+      console.log(idCardSelecionado);
       itemEditado.remove();
       popupDelete.style.display = 'none';
 
@@ -349,31 +355,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const botaoCancelar = popupEditar.querySelector('.botaoCancelar');
   botaoCancelar.addEventListener('click', () => {
-    popupEditar.style.display = 'none';
-  });
-
-  const botaoOkEditar = popupEditar.querySelector('.botaoOk');
-  botaoOkEditar.addEventListener('click', () => {
-    if (itemEditado) {
-      const tituloDoEditado = itemEditado
-        .querySelector('.card-title')
-        .textContent.trim();
-      const descricaoDoEditado = itemEditado.querySelector('.card-descricao');
-      const textareaPopup = popupEditar.querySelector('.caixa_texto');
-      descricaoDoEditado.textContent = textareaPopup.value;
-      itemEditado = null;
-
-      //salvar alteracao no localStorage
-      const listaDadosEditado = JSON.parse(localStorage.getItem('cards')) || [];
-      const index = listaDadosEditado.findIndex(
-        (item) => item.titulo === tituloDoEditado
-      );
-
-      if (index !== -1) {
-        listaDadosEditado[index].descricao = textareaPopup.value;
-        localStorage.setItem('cards', JSON.stringify(listaDadosEditado));
-      }
-    }
     popupEditar.style.display = 'none';
   });
 });

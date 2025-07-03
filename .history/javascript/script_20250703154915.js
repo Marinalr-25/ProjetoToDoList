@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         selecionadoPrioridade = radio.nextElementSibling.textContent;
+        console.log(selecionadoPrioridade);
       }
     });
   });
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   textarea.addEventListener('blur', function () {
     const textareavalue = this.value;
+    console.log(textareavalue);
   });
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
@@ -156,30 +158,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const cardID = generateCardID();
     novoCard.setAttribute('data-id', cardID);
-
-    novoCard.setAttribute('data-id', cardID);
-
-    const conteudoCard = `
-        <div class= "badge ${prioridadeClasse}">
-            <span>${selecionadoPrioridade} </span>
-        </div>
-        <p class="card-title">${tituloCaixa} </p>
-        <div class="card-infos"> 
-          <div class="card-descricao">${descricao}
-          </div>
-          <div class="card-icons">
-                <div class="iconeDelete">
-                  <i class="fa-solid fa-trash"></i>
-                </div>
-                <div class="iconeEdit">
-                  <i class="fa-solid fa-pen"></i>
-                </div>
-            </div>
-            <div class="user">
-                <img src="images/iconePerfilPlanejamento.png" alt="avatar2" />
-            </div>
-        </div>
-    `;
 
     novoCard.innerHTML = conteudoCard;
     kanbanCards.append(novoCard);
@@ -276,7 +254,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const botaoDelete = e.target.closest('.iconeDelete');
     const botaoEdit = e.target.closest('.iconeEdit');
     if (botaoDelete) {
-      const popupDelete = document.querySelector('.popupDeletar');
       const esteItem = e.target.closest('.kanban-card');
       itemEditado = esteItem;
       const prioridadeCard = esteItem.querySelector('span');
@@ -329,8 +306,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const botaoSimDeletar = popupDelete.querySelector('.botaoSim');
 
   botaoSimDeletar.addEventListener('click', () => {
+    console.log(botaoSimDeletar, 'deletou');
+    console.log(itemEditado);
     if (itemEditado) {
       const idCardSelecionado = itemEditado.dataset.id;
+      console.log(idCardSelecionado);
       itemEditado.remove();
       popupDelete.style.display = 'none';
 
@@ -354,26 +334,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const botaoOkEditar = popupEditar.querySelector('.botaoOk');
   botaoOkEditar.addEventListener('click', () => {
+    console.log('sou o botao editavel');
     if (itemEditado) {
       const tituloDoEditado = itemEditado
         .querySelector('.card-title')
         .textContent.trim();
       const descricaoDoEditado = itemEditado.querySelector('.card-descricao');
       const textareaPopup = popupEditar.querySelector('.caixa_texto');
+      console.log(textareaPopup.value);
+      console.log(descricaoDoEditado.textContent);
       descricaoDoEditado.textContent = textareaPopup.value;
+      console.log('foi?');
       itemEditado = null;
-
-      //salvar alteracao no localStorage
-      const listaDadosEditado = JSON.parse(localStorage.getItem('cards')) || [];
-      const index = listaDadosEditado.findIndex(
-        (item) => item.titulo === tituloDoEditado
-      );
-
-      if (index !== -1) {
-        listaDadosEditado[index].descricao = textareaPopup.value;
-        localStorage.setItem('cards', JSON.stringify(listaDadosEditado));
-      }
     }
+
     popupEditar.style.display = 'none';
   });
 });

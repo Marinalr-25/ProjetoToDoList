@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
     radio.addEventListener('change', () => {
       if (radio.checked) {
         selecionadoPrioridade = radio.nextElementSibling.textContent;
+        console.log(selecionadoPrioridade);
       }
     });
   });
@@ -132,6 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   textarea.addEventListener('blur', function () {
     const textareavalue = this.value;
+    console.log(textareavalue);
   });
   cancelar.addEventListener('click', function () {
     adicionando.style.display = 'none';
@@ -164,10 +166,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <span>${selecionadoPrioridade} </span>
         </div>
         <p class="card-title">${tituloCaixa} </p>
-        <div class="card-infos"> 
-          <div class="card-descricao">${descricao}
-          </div>
-          <div class="card-icons">
+        <div class="card-infos"> ${descricao}
+            <div class="card-icons">
                 <div class="iconeDelete">
                   <i class="fa-solid fa-trash"></i>
                 </div>
@@ -276,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const botaoDelete = e.target.closest('.iconeDelete');
     const botaoEdit = e.target.closest('.iconeEdit');
     if (botaoDelete) {
-      const popupDelete = document.querySelector('.popupDeletar');
       const esteItem = e.target.closest('.kanban-card');
       itemEditado = esteItem;
       const prioridadeCard = esteItem.querySelector('span');
@@ -329,8 +328,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const botaoSimDeletar = popupDelete.querySelector('.botaoSim');
 
   botaoSimDeletar.addEventListener('click', () => {
+    console.log(botaoSimDeletar, 'deletou');
+    console.log(itemEditado);
     if (itemEditado) {
       const idCardSelecionado = itemEditado.dataset.id;
+      console.log(idCardSelecionado);
       itemEditado.remove();
       popupDelete.style.display = 'none';
 

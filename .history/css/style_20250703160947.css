@@ -280,7 +280,7 @@ label:hover {
 .popupEditar__titulo {
   border: 0;
   resize: none;
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 1.2rem;
 }
 
@@ -288,7 +288,7 @@ label:hover {
 .caixa_texto:focus {
   outline: none;
   box-shadow: inset 0 0 1.5rem 0.2rem transparent;
-  border: 3px solid #998fe8;
+  border: 2px solid #998fe8;
 }
 
 .descricao,
@@ -419,10 +419,7 @@ label:hover {
 }
 .popupDeletar__descricaoDelete,
 .popupEditar__descricao {
+  padding: 1re;
   height: max-content;
   width: max-content;
-}
-
-.popupDeletar__descricaoDelete {
-  padding: 1rem;
 }
