@@ -312,8 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
       popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.textContent = infosCard;
 
-      verificarTitulo(popupDeleteTitulo, tituloCard);
-
       popupDelete.style.display = 'flex';
     }
     if (botaoEdit) {
@@ -326,7 +324,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const popupEditarPrioridade = popupEditar.querySelector(
         '.popupEditar__prioridade'
       );
-      const popupEditTitulo = popupEditar.querySelector('.popupEditar__titulo');
+      const popupDeleteTitulo = popupEditar.querySelector(
+        '.popupEditar__titulo'
+      );
       const popupDeleteDescricao = popupEditar.querySelector(
         '.popupEditar__descricao .caixa_texto'
       );
@@ -336,12 +336,18 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log(tituloCard);
 
       popupEditarPrioridade.textContent = prioridadeCard.innerText;
-      popupEditTitulo.textContent = tituloCard;
+      popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.value = descricaoCard.innerText.trim();
 
-      verificarTitulo(popupEditTitulo, tituloCard);
+      verificarTitulo(popupDeleteTitulo, tituloCard);
 
       console.log(tituloCard);
+      // const tituloPopup = popupEditar.querySelector('.popupEditar__titulo');
+      // if (tituloCard === '') {
+      //   tituloPopup.style.display = 'none';
+      // } else {
+      //   tituloPopup.style.display = 'flex';
+      // }
     }
   });
 

@@ -312,8 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
       popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.textContent = infosCard;
 
-      verificarTitulo(popupDeleteTitulo, tituloCard);
-
       popupDelete.style.display = 'flex';
     }
     if (botaoEdit) {
@@ -342,6 +340,12 @@ document.addEventListener('DOMContentLoaded', function () {
       verificarTitulo(popupEditTitulo, tituloCard);
 
       console.log(tituloCard);
+      // const tituloPopup = popupEditar.querySelector('.popupEditar__titulo');
+      // if (tituloCard === '') {
+      //   tituloPopup.style.display = 'none';
+      // } else {
+      //   tituloPopup.style.display = 'flex';
+      // }
     }
   });
 

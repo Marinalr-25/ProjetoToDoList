@@ -312,8 +312,6 @@ document.addEventListener('DOMContentLoaded', function () {
       popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.textContent = infosCard;
 
-      verificarTitulo(popupDeleteTitulo, tituloCard);
-
       popupDelete.style.display = 'flex';
     }
     if (botaoEdit) {

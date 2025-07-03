@@ -264,14 +264,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   fecharPopup(botaoNaoDelete, popupDelete);
 
-  function verificarTitulo(tituloDoPopup, tituloDoCard) {
-    if (tituloDoCard === '') {
-      tituloDoPopup.style.display = 'none';
-    } else {
-      tituloDoPopup.style.display = 'flex';
-    }
-  }
-
   function definirCorPrioridade(popup, prioridadeCard) {
     popup.classList.remove('high', 'medium', 'low');
     if (prioridadeCard.innerText === 'Alta prioridade') {
@@ -312,8 +304,6 @@ document.addEventListener('DOMContentLoaded', function () {
       popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.textContent = infosCard;
 
-      verificarTitulo(popupDeleteTitulo, tituloCard);
-
       popupDelete.style.display = 'flex';
     }
     if (botaoEdit) {
@@ -326,7 +316,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const popupEditarPrioridade = popupEditar.querySelector(
         '.popupEditar__prioridade'
       );
-      const popupEditTitulo = popupEditar.querySelector('.popupEditar__titulo');
+      const popupDeleteTitulo = popupEditar.querySelector(
+        '.popupEditar__titulo'
+      );
       const popupDeleteDescricao = popupEditar.querySelector(
         '.popupEditar__descricao .caixa_texto'
       );
@@ -335,13 +327,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       console.log(tituloCard);
 
+      if (tituloCard === '') {
+        const tituloPopup = popupEditar.querySelector('.popupEditar__titulo');
+        tituloPopup.style.display = 'none';
+      }
+
       popupEditarPrioridade.textContent = prioridadeCard.innerText;
-      popupEditTitulo.textContent = tituloCard;
+      popupDeleteTitulo.textContent = tituloCard;
       popupDeleteDescricao.value = descricaoCard.innerText.trim();
-
-      verificarTitulo(popupEditTitulo, tituloCard);
-
-      console.log(tituloCard);
     }
   });
 
